@@ -63,7 +63,8 @@ OBJS =  UdpSlot.o Rebalance.o \
 	Users.o Images.o Wiki.o Wiktionary.o Scraper.o \
 	Dates.o Sections.o SiteGetter.o Syncdb.o qa.o \
 	Placedb.o Address.o Test.o GeoIP.o GeoIPCity.o Synonyms.o \
-	Cachedb.o Monitordb.o dlstubs.o PageCrawlBot.o Json.o PageBasic.o \
+	Cachedb.o Monitordb.o \
+	PageCrawlBot.o Json.o PageBasic.o \
 	Version.o
 
 CHECKFORMATSTRING = -D_CHECK_FORMAT_STRING_
@@ -113,7 +114,7 @@ endif
 
 # if you have seo.cpp link that in. This is not part of the open source
 # distribution but is available for interested parties.
-ifneq ($(wildcard seo.cpp),) 
+ifneq ($(wildcard seo.cpp),)
 OBJS:=$(OBJS) seo.o
 endif
 
@@ -122,7 +123,7 @@ endif
 # let's keep the libraries in the repo for easier bug reporting and debugging
 # in general if we can. the includes are still in /usr/include/ however...
 # which is kinda strange but seems to work so far.
-#LIBS= -L. ./libz.a ./libssl.a ./libcrypto.a ./libiconv.a ./libm.a ./libgcc.a ./libpthread.a ./libc.a ./libstdc++.a 
+#LIBS= -L. ./libz.a ./libssl.a ./libcrypto.a ./libiconv.a ./libm.a ./libgcc.a ./libpthread.a ./libc.a ./libstdc++.a
 
 
 
@@ -163,7 +164,7 @@ gb: vclean $(OBJS) main.o $(LIBFILES)
 	$(CC) $(DEFS) $(CPPFLAGS) -o $@ main.o $(OBJS) $(LIBS)
 
 
-# use this for compiling on CYGWIN: 
+# use this for compiling on CYGWIN:
 # only for 32bit cygwin right now and
 # you have to install the packages that have these libs.
 # you have to get these packages from cygwin:
@@ -196,9 +197,9 @@ gb32:
 run_parser: test_parser
 	./test_parser ~/turkish.html
 
-test_parser: $(OBJS) test_parser.o Makefile 
+test_parser: $(OBJS) test_parser.o Makefile
 	g++ $(DEFS) $(CPPFLAGS) -o $@ test_parser.o $(OBJS) $(LIBS)
-test_parser2: $(OBJS) test_parser2.o Makefile 
+test_parser2: $(OBJS) test_parser2.o Makefile
 	g++ $(DEFS) $(CPPFLAGS) -o $@ test_parser2.o $(OBJS) $(LIBS)
 
 test_hash: test_hash.o $(OBJS)
@@ -234,7 +235,7 @@ thunder: thunder.o
 threadtest: threadtest.o
 	$(CC) $(DEFS) $(CPPFLAGS) -o $@ $@.o -lpthread
 memtest: memtest.o
-	$(CC) $(DEFS) $(CPPFLAGS) -o $@ $@.o 
+	$(CC) $(DEFS) $(CPPFLAGS) -o $@ $@.o
 hashtest: hashtest.cpp
 	$(CC) -O3 -o hashtest hashtest.cpp
 hashtest0: hashtest
@@ -302,236 +303,236 @@ clean:
 #.PHONY: GBVersion.cpp
 
 convert.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 StopWords.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 Places.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 Loop.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 hash.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 fctypes.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 IndexList.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 Matches.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 Highlight.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 matches2.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 linkspam.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 Matchers.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 HtmlParser.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 
 # Url::set() seems to take too much time
 Url.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 # Sitedb has that slow matching code
 Sitedb.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 Catdb.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 # when making a new file, add the recs to the map fast
 RdbMap.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 # this was getting corruption, was it cuz we used -O2 compiler option?
 # RdbTree.o:
-# 	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp 
+# 	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp
 
 RdbBuckets.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp
 
 Linkdb.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp
 
 XmlDoc.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp
 
 # final gigabit generation in here:
 Msg40.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp
 
 seo.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp
 
 TopTree.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp
 
 UdpServer.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 RdbList.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 Rdb.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 # take this out. seems to not trigger merges when percent of
 # negative titlerecs is over 40.
 RdbBase.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 # RdbCache.cpp gets "corrupted" with -O2... like RdbTree.cpp
 #RdbCache.o:
-#	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+#	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 # fast dictionary generation and spelling recommendations
 #Speller.o:
-#	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+#	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 # O2 seems slightly faster than O2 on this for some reason
 # O2 is almost twice as fast as no O
 IndexTable.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 IndexTable2.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 Posdb.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 # Query::setBitScores() needs this optimization
 #Query.o:
-#	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+#	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 # Msg3's should calculate the page ranges fast
 #Msg3.o:
-#	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+#	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 # fast parsing
 Xml.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 XmlNode.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 Words.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 Unicode.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 UCWordIterator.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 UCPropTable.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 UnicodeProperties.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 UCNormalizer.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 Pos.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 Pops.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 Bits.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 Scores.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 Sections.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 Weights.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 neighborhood.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 TermTable.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 # why was this commented out?
 Summary.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 Title.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 # fast relate topics generation
 Msg24.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 Msg1a.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 Msg1b.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 SafeBuf.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp
 
 Msg1c.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -c $*.cpp
 
 Msg1d.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -c $*.cpp
 
 AutoBan.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 Profiler.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 HtmlCarver.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 HashTableT.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 Timedb.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 HashTableX.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 SpiderCache.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 DateParse.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 #DateParse2.o:
-#	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+#	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 test_parser2.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O2 -c $*.cpp
 
 Language.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp
 
 WordsWindow.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 AppendingWordsWindow.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 PostQueryRerank.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O2 -c $*.cpp
 
 sort.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -O3 -c $*.cpp
 
 # SiteBonus.o:
-# 	$(CC) $(DEFS) $(CPPFLAGS)  -O3 -c $*.cpp 
+# 	$(CC) $(DEFS) $(CPPFLAGS)  -O3 -c $*.cpp
 Msg6a.o:
-	$(CC) $(DEFS) $(CPPFLAGS)  -O3 -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS)  -O3 -c $*.cpp
 
 # Stupid gcc-2.95 stabs debug can't handle such a big file.
 # add -m32 flag to this line if you need to make a 32-bit gb.
 #geo_ip_table.o: geo_ip_table.cpp geo_ip_table.h
-#	$(CC) $(DEFS) -Wall -pipe -c $*.cpp 
+#	$(CC) $(DEFS) -Wall -pipe -c $*.cpp
 
 # dpkg-buildpackage calls 'make binary' to create the files for the deb pkg
 # which must all be stored in ./debian/gb/
@@ -560,10 +561,10 @@ install:
 	ln -s /etc/init.d/gb $(DESTDIR)/etc/rc3.d/S99gb
 
 .cpp.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -c $*.cpp 
+	$(CC) $(DEFS) $(CPPFLAGS) -c $*.cpp
 
 .c.o:
-	$(CC) $(DEFS) $(CPPFLAGS) -c $*.c 
+	$(CC) $(DEFS) $(CPPFLAGS) -c $*.c
 
 #.cpp: $(OBJS)
 #	$(CC) $(DEFS) $(CPPFLAGS) -o $@ $@.o $(OBJS) $(LIBS)
@@ -572,17 +573,17 @@ install:
 ##
 ## Auto dependency generation
 ## This is broken, if you edit Version.h and recompile it doesn't work. (mdw)
-#%.d: %.cpp	
+#%.d: %.cpp
 #	@echo "generating dependency information for $<"
 #	@set -e; $(CC) -M $(DEFS) $(CPPFLAGS) $< \
 #	| sed 's/\($*\)\.o[ :]*/\1.o $@ : /g' > $@; \
 #	[ -s $@ ] || rm -f $@
 #-include $(SRCS:.cpp=.d)
 
-depend: 
+depend:
 	@echo "generating dependency information"
 	( $(CC) -MM $(DEFS) $(DPPFLAGS) *.cpp > Make.depend ) || \
-	$(CC) -MM $(DEFS) $(DPPFLAGS) *.cpp > Make.depend 
+	$(CC) -MM $(DEFS) $(DPPFLAGS) *.cpp > Make.depend
 
 -include Make.depend
 
@@ -638,13 +639,13 @@ master-deb:
 # build the package now
 	dpkg-buildpackage -nc -ai386 -ti386 -b -uc -rfakeroot
 # move to current dur
-	mv ../gb_*.deb .	
+	mv ../gb_*.deb .
 # upload den
-	scp gb*.deb gk268:/w/html/	
+	scp gb*.deb gk268:/w/html/
 # alien it
 	sudo alien --to-rpm gb_1.17-1_i386.deb
 # upload rpm
-	scp gb*.rpm gk268:/w/html/	
+	scp gb*.rpm gk268:/w/html/
 
 #deb-testing
 testing-deb:
@@ -668,9 +669,9 @@ testing-deb:
 	cp changelog debian/changelog
 # make the pkg dependencies file ourselves since we overrode dh_shlibdeps
 # with our own debian/rules file. see that file for more info.
-#	echo  "shlibs:Depends=libc6 (>= 2.3)" > debian/gb.substvars 
-#	echo  "shlibs:Depends=netpbm (>= 0.0)" > debian/gb.substvars 
-#	echo  "misc:Depends=netpbm (>= 0.0)" > debian/gb.substvars 
+#	echo  "shlibs:Depends=libc6 (>= 2.3)" > debian/gb.substvars
+#	echo  "shlibs:Depends=netpbm (>= 0.0)" > debian/gb.substvars
+#	echo  "misc:Depends=netpbm (>= 0.0)" > debian/gb.substvars
 # fix dh_shlibdeps from bitching about dependencies on shared libs
 # YOU HAVE TO RUN THIS before you run 'make'
 #	export LD_LIBRARY_PATH=./debian/gb/var/gigablast/data0
@@ -679,7 +680,7 @@ testing-deb:
 	dpkg-buildpackage -nc -ai386 -ti386 -b -uc -rfakeroot
 #	dpkg-buildpackage -nc -b -uc -rfakeroot
 # move to current dur
-	mv ../gb_*.deb .	
+	mv ../gb_*.deb .
 
 install-pkgs-local:
 	sudo alien --to-rpm gb_1.5-1_i386.deb
